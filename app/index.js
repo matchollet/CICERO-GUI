@@ -2,23 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WelcomeMessage from './components/WelcomeMessage.jsx';
 import EntryBox from './components/EntryBox.jsx';
+import App from './components/App.jsx';
 import {Grid, Row, Col} from 'react-bootstrap';
+import {BrowserRouter} from 'react-router-dom';
+//import {ThemeSwitcher} from 'react-bootstrap-theme-switcher';
 //import Center from 'react-center';
 
 //Add some navbar options?
 
 ReactDOM.render(
-    <Grid className="center-container">
-        <Row>
-            <Col leg={6} lgOffset={3}>
-                <h1>Welcome to CICERO</h1> 
-            </Col>
-        </Row>
-        <Row>
-            <Col lg={6} lgOffset={3}> 
-                    <EntryBox></EntryBox>
-            </Col>
-        </Row>
-    </Grid>
+        <BrowserRouter themePath='./themes' defaultTheme="solar">
+            <App></App>
+        </BrowserRouter>
     , document.getElementById("container")
 );
