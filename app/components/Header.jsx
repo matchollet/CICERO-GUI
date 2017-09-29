@@ -7,12 +7,15 @@ export default class Header extends React.Component{
         return(
             <header>
                     <Navbar collapseOnSelect>
+                        <Navbar.Header>
+                            <Navbar.Brand style={{ fontSize : '30px', letterSpacing:'3px' }}>CICERO</Navbar.Brand>
+                        </Navbar.Header>
                         <Nav>
-                            <NavItem><Link to='/'>Change User</Link></NavItem>
+                            <NavItem><Link style={{ textDecoration: 'none' }} to='/'>Change User</Link></NavItem>
                         </Nav>
                         <Nav pullRight>     
-                            <NavItem><Link to='/sessions'>Sessions</Link></NavItem>
-                            <NavItem><Link to='/new'>New</Link></NavItem>
+                            <NavItem><Link style={{ textDecoration: 'none' }} to='/sessions'>Sessions</Link></NavItem>
+                            <NavItem><Link style={{ textDecoration: 'none' }} to='/new'>New</Link></NavItem>
                         </Nav>
                     </Navbar>
             </header>
