@@ -11,7 +11,7 @@ import {BrowserRouter} from 'react-router-dom';
 //Add some navbar options?
 
 ReactDOM.render(
-        <BrowserRouter themePath='./themes' defaultTheme="solar">
+        <BrowserRouter>
             <App></App>
         </BrowserRouter>
     , document.getElementById("container")

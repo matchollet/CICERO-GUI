@@ -10,11 +10,15 @@ export default class Content extends React.Component{
         return(
             <main>
                 <Grid>
-                    <Switch>
-                        <Route exact path='/' component = {Login} ></Route>
-                        <Route path='/sessions' component = {SessionList}></Route>
-                        <Route path='/new' component = {NewSession}></Route>
-                    </Switch>
+                    <Row>
+                        <Col lgOffset='3' lg='6'>
+                        <Switch>
+                            <Route exact path='/' component = {Login} ></Route>
+                            <Route path='/sessions' component = {SessionList}></Route>
+                            <Route path='/new' component = {NewSession}></Route>
+                        </Switch>
+                        </Col>
+                    </Row>
                 </Grid>
             </main>
         )
