@@ -11,7 +11,7 @@ export default class Content extends React.Component{
             <main>
                 <Grid>
                     <Row>
-                        <Col lgOffset='3' lg='6'>
+                    <Col lgOffset={3} lg={6}>
                         <Switch>
                             <Route exact path='/' component = {Login} ></Route>
                             <Route path='/sessions' component = {SessionList}></Route>
