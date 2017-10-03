@@ -1,11 +1,25 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-export default class SessionList extends React.Component{
+class SessionList extends React.Component{
+    
+    constructor(props){
+        super(props);
+    }
+    
     render(){
         return(
             <div>
-                <h1>There will be a list of sessions here</h1>
+                <h3 style={{textAlign:'center'}}>You have logged in as {this.props.user.user_id}</h3>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user : state.user
+    }
+};
+
+export default connect(mapStateToProps)(SessionList);

@@ -31,9 +31,9 @@ class Login extends React.Component{
     }
 
     handleLogin(user){
-        this.props.userLogin(user);
-        console.log(this.props);
+        this.props.userLogin(user); 
     }
+
 
     handleChange(e){
         console.log(e.target.value);

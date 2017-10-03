@@ -7,3 +7,10 @@ export const userLogin = (user) => {
         user : user
     }
 };
+
+export const userLoginCheck = () => {
+    return {
+        type : ActionTypes.USER_LOGIN_CHECK
+    }
+};
+

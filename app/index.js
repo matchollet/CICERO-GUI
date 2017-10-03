@@ -11,12 +11,12 @@ import rootReducer from './reducers/index.js';
 
 const defaultState = {
     user : {
-        user_id : '',
+        user_id : null,
         logged_in : false
     }
 }
 
-const store = createStore(rootReducer, defaultState);
+const store = createStore(rootReducer, defaultState,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
         <Provider store={store}>
