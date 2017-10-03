@@ -1,10 +1,11 @@
 import * as ActionTypes from '../actions/actionTypes.js';
 
-const userReducer = (state = [], action) => {
-    let newState;
+const userReducer = (state = {}, action) => {
     switch(action.type){
         case ActionTypes.USER_LOGIN:
-            return newState = Object.assign(newState, action.user);
+            return Object.assign({}, state, {
+                user : action.user
+            });
         default:
             return state;
     }
