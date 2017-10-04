@@ -10,6 +10,7 @@ CICERO After Action Report using React.js and Node.
 
 ```
 $ git clone https://github.com/pranavghate94/CICERO-GUI.git
+$ cd ./CICERO-GUI/
 $ yarn install
 ```
 
