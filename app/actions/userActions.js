@@ -8,9 +8,3 @@ export const userLogin = (user) => {
     }
 };
 
-export const userLoginCheck = () => {
-    return {
-        type : ActionTypes.USER_LOGIN_CHECK
-    }
-};
-
