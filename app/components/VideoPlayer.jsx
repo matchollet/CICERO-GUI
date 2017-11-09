@@ -1,25 +1,22 @@
-import React from 'react';
-import videojs from 'video.js';
+import React from "react";
+import {Player} from "video-react";
 
-export default class VideoPlayer extends React.Component{
-    componentDidMount(){
-        //Instantiate Video.js
-        this.player = videojs(this.videoNode, this.props, function onPlayerReady(){
-            console.log('onPlayerReady', this);
-        });
-    }
+class VideoPlayer extends React.Component{
 
-    componentWillMount(){
-        if(this.player){
-            this.player.dispose();
-        }
+    constructor(props){
+        super(props);
     }
 
     render(){
         return(
-            <div data-vjs-player>
-                <video ref={ node => this.videoNode = node } className="video-js"></video>
+            <div>
+                <Player>
+                    <source src={"https://localhost:8000/video/" + this.props.video_file_id}/>
+                </Player>
             </div>
-        )
+        );
     }
+
 }
+
+export default VideoPlayer;
