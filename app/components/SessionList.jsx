@@ -13,7 +13,7 @@ class SessionList extends React.Component {
   }
 
   componentWillMount() {
-    fetch("http://127.0.0.1:8000/api/sessions/" + this.props.user.user_id)
+    fetch("http://127.0.0.1:8000/api/sessions/list/" + this.props.user.user_id)
       .then(response => {
         response
           .json()
@@ -33,9 +33,9 @@ class SessionList extends React.Component {
 
   render() {
     //console.log(this.state.sessionList);
-    const sessionListItems = this.state.sessionList.map(session => {
+    const sessionListItems = this.state.sessionList.map((session, key) => {
       return (
-        <tr>
+        <tr key={session.session_id}>
           <td>{session.session_id}</td>
           <td>{session.start_time}</td>
           <td>{session.end_time}</td>
