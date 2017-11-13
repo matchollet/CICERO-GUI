@@ -15,20 +15,34 @@ class SummaryGraph extends React.Component {
 
   render() {
     return (
-      <div>
-       
-        <VictoryChart
-          polar
-          theme={VictoryTheme.material}
-          containerComponent={<VictoryContainer responsive={false}
-          height = {300}
-          width = {300}
-           />}
-        >
-          <VictoryArea data={this.props.data} />
-          <VictoryPolarAxis />
-        </VictoryChart>
-      </div>
+      <VictoryChart
+        polar
+        theme={VictoryTheme.material}
+        containerComponent={<VictoryContainer responsive={false} />}
+        height={450}
+        width={450}
+        domain={{y:[0,100]}}
+      >
+        <VictoryArea data={this.props.data} style={{ data: { fill: "red", width: 30 } }}/>
+        {
+          ["Smile", "Attention", "Hesitation"].map((d, i)=> {
+            return(
+              <VictoryPolarAxis dependentAxis 
+                key = {i}
+                label = {d}
+                labelPlacement = "perpendicular"
+                axisValue = {i}
+                style = {{
+                  axis : {
+                    stroke : "none"
+                  }
+                }}
+              />
+            );
+          })
+
+        }
+      </VictoryChart>
     );
   }
 }

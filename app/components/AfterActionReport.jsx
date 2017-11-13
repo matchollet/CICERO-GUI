@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import VideoPlayer from "./VideoPlayer.jsx";
 import SummaryGraph from "./SummaryGraph.jsx";
+import SummaryTabs from "./SummaryTabs.jsx";
 
 class AfterActionReport extends React.Component {
   constructor(props) {
@@ -10,34 +11,7 @@ class AfterActionReport extends React.Component {
       session_id: null,
       video_file_name: null,
       pml_file_ids: [],
-      sample_data: [
-        {
-          x: 1,
-          y: 1,
-          label: "first",
-          symbol: "star",
-          opacity: 0.5,
-          fill: "blue"
-        },
-        {
-          x: 2,
-          y: 2,
-          label: "second",
-          symbol: "circle",
-          opacity: 0.8,
-          fill: "red"
-        },
-        {
-          x: 3,
-          y: 3,
-          label: "third",
-          symbol: "square",
-          fill: "white",
-          stroke: "black",
-          strokeWidth: 2
-        },
-        { x: 4, y: 4, label: "fourth", symbol: "diamond", fill: "green" }
-      ]
+      sample_data: [{ x: 1, y: 20 }, { x: 2, y: 40 }, { x: 3, y: 40 }]
     };
 
     this.setSessionId = this.setSessionId.bind(this);
@@ -85,16 +59,19 @@ class AfterActionReport extends React.Component {
     return (
       <Grid>
         <Row>
-          <Col lg={6} md={6}>
+          <Col lg={7} md={7}>
             <VideoPlayer video_file_name={this.state.video_file_name} />
           </Col>
-          <Col lg={6} md={6}>
-            <h3>Summary</h3>
+          <Col lg={5} md={5}>
+            <h3 style={{ textAlign: "center" }}>Summary</h3>
             <SummaryGraph data={this.state.sample_data} />
           </Col>
         </Row>
+        <hr />
         <Row>
-          <Col lg={12} md={12} />
+          <Col lg={12} md={12}>
+            <SummaryTabs/>
+          </Col>
         </Row>
       </Grid>
     );

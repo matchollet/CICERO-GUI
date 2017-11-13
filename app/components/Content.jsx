@@ -12,7 +12,7 @@ export default class Content extends React.Component{
             <main>
                 <Grid>
                     <Row>
-                    <Col lgOffset={3} lg={6}>
+                    <Col lg={12} md={12}>
                         <Switch>
                             <Route exact path='/' component = {Login} ></Route>
                             <Route path='/sessions' component = {SessionList}></Route>
