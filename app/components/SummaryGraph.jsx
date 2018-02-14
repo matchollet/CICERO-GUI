@@ -5,8 +5,12 @@ import {
   VictoryArea,
   VictoryContainer,
   VictoryChart,
-  VictoryPolarAxis
+  VictoryPolarAxis,
+  VictoryPie
 } from "victory";
+
+import ReactSpeedometer from "react-d3-speedometer";
+
 
 class SummaryGraph extends React.Component {
   constructor(props) {
@@ -15,34 +19,14 @@ class SummaryGraph extends React.Component {
 
   render() {
     return (
-      <VictoryChart
-        polar
-        theme={VictoryTheme.material}
-        containerComponent={<VictoryContainer responsive={false} />}
-        height={450}
-        width={450}
-        domain={{y:[0,100]}}
-      >
-        <VictoryArea data={this.props.data} style={{ data: { fill: "red", width: 30 } }}/>
-        {
-          ["Smile", "Attention", "Hesitation"].map((d, i)=> {
-            return(
-              <VictoryPolarAxis dependentAxis 
-                key = {i}
-                label = {d}
-                labelPlacement = "perpendicular"
-                axisValue = {i}
-                style = {{
-                  axis : {
-                    stroke : "none"
-                  }
-                }}
-              />
-            );
-          })
-
-        }
-      </VictoryChart>
+      
+       <ReactSpeedometer
+        width = {400}
+        height = {400}
+        minValue = {0}
+        maxValue = {100}
+        value = {30}
+       />
     );
   }
 }

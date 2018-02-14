@@ -11,7 +11,7 @@ class VideoPlayer extends React.Component{
         return( 
             <div>
                 <Player>
-                    <source src={"http://127.0.0.1:8000/video/" + this.props.video_file_name + ".mp4"}/> 
+                    <source src={"http://127.0.0.1:8000/video/" + this.props.video_file_name}/> 
                 </Player>
             </div>
         );

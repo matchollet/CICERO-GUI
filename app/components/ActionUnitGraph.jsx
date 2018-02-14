@@ -14,6 +14,8 @@ class ActionUnitGraph extends React.Component {
   render() {
     return (
       <VictoryChart
+        width = {1200}
+        height = {250}
         containerComponent={<VictoryContainer responsive={false} />}
         theme = {VictoryTheme.material}
       >
