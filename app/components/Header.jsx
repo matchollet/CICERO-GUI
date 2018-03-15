@@ -26,7 +26,7 @@ class Header extends React.Component{
 
         return(
             <header>
-                    <Navbar collapseOnSelect>
+                    <Navbar>
                         <Navbar.Header>
                             <Navbar.Brand style={{ fontSize : '25px', letterSpacing:'3px' }}>CICERO</Navbar.Brand>
                         </Navbar.Header>
