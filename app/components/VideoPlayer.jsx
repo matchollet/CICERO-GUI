@@ -10,8 +10,8 @@ class VideoPlayer extends React.Component {
 
     return (
       <div>
-        <Player 
-            src="http://127.0.0.1:8000/video/011316_Frontal_S11_OSS_P2.mp4"
+        <Player
+                src={'http://127.0.0.1:8000/video/' + this.props.session + '/' + this.props.session + '.mp4'}
         />
       </div>
     );

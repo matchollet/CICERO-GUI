@@ -95,13 +95,13 @@ class AfterActionReport extends React.Component {
   setVideoFileName(session_id) {
     console.log(session_id);
 
-    fetch("http://127.0.0.1:8000/api/video/session/" + session_id)
+    fetch("http://127.0.0.1:8000/api/session/" + session_id)
       .then(response => {
         response
           .json()
           .then(data => {
             this.setState({
-              video_file_name: data.video_file_name
+              video_file_name: data.video_file_id
             });
           })
           .catch(err => {
@@ -129,8 +129,8 @@ class AfterActionReport extends React.Component {
     return (
       <Grid>
         <Row>
-          <Col lg={7} md={7}>
-            <VideoPlayer video_file_name={this.state.video_file_name} />
+                <Col lg={7} md={7}>
+                    <VideoPlayer video_file_name={this.state.video_file_name} session={this.state.session_id} />
           </Col>
           <Col lg={5} md={5}>
             <h3 style={{ textAlign: "center" }}>Summary</h3>
