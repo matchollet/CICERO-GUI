@@ -5,6 +5,7 @@ import NewSession from './NewSession.jsx';
 import { Switch, Route } from 'react-router-dom';
 import {Grid, Row, Col} from 'react-bootstrap';
 import AfterActionReport from './AfterActionReport.jsx';
+import StandaloneReport from './StandaloneReport.jsx';
 
 export default class Content extends React.Component{
     render(){
@@ -14,6 +15,7 @@ export default class Content extends React.Component{
                     <Row>
                     <Col lg={12} md={12}>
                         <Switch>
+                            <Route exact path="/report/:sessionid" component = {StandaloneReport}></Route>
                             <Route exact path='/' component = {Login} ></Route>
                             <Route path='/sessions' component = {SessionList}></Route>
                             <Route path='/new' component = {NewSession}></Route>
