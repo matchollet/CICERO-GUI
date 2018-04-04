@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Row, Col, Button } from "react-bootstrap";
+import {Container, Row, Col} from 'reactstrap';
 import VideoPlayer from "./VideoPlayer.jsx";
 import SummaryGraph from "./SummaryGraph.jsx";
 import SummaryTabs from "./SummaryTabs.jsx";
@@ -125,18 +125,21 @@ class StandaloneReport extends React.Component {
     // }
 
     return (
-      <Grid>
+      <Container>
         <Row>
-          <Col lg={7} md={7}>
+          <Col lg={12} md={12} xs={12} className="text-center">
+            <h1>After-Action-Report</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={3} md={3} xs={0}/>
+          <Col lg={6} md={6} xs={12}>
             <VideoPlayer
               video_file_name={this.state.video_file_name}
               session={this.state.session_id}
             />
           </Col>
-          <Col lg={5} md={5}>
-            <h3 style={{ textAlign: "center" }}>Summary</h3>
-            <SummaryGraph />
-          </Col>
+          <Col lg={3} md={3} xs={0}/>
         </Row>
         <hr />
         <Row>
@@ -157,7 +160,7 @@ class StandaloneReport extends React.Component {
             <MBUGraph data={this.state.AU12} />
           </Col>
         </Row>
-      </Grid>
+      </Container>
     );
   }
 }

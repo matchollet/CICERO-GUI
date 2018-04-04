@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button, Tooltip, TooltipContent} from 'reactstrap';
 
 class HomeTest extends React.Component{
     constructor(props){
@@ -8,7 +9,10 @@ class HomeTest extends React.Component{
     render(){
         return(
             <div>
-                Home
+            This is a <a href="#" id="TooltipExample">tooltip</a> example.
+              <Tooltip target="TooltipExample">
+                <TooltipContent/>
+              </Tooltip>
             </div>
         )
     }
