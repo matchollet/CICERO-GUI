@@ -4,11 +4,11 @@ import {Col} from "react-bootstrap";
 class SummaryTypeData extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      smile_data : this.props.summary_data
-    }
 
   }
+
+
+  calculate
 
   render() {
 

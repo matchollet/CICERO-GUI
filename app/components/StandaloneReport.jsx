@@ -13,18 +13,36 @@ class StandaloneReport extends React.Component {
       session_id: null,
       video_file_name: null,
       action_unit_bar_state: false,
-      smiling_scores: [],
-      frowning_scores: [],
-      attention_scores: [],
+      gaze_direction : [],
+      hesitations : null,
+      transcript : null,
       AU6: [],
-      AU12: []
+      AU12: [],
     };
 
     this.setSessionId = this.setSessionId.bind(this);
     this.setVideoFileName = this.setVideoFileName.bind(this);
-    this.getGraphData = this.getGraphData.bind(this);
     this.getAUData = this.getAUData.bind(this);
+    this.getAudioMetaData = this.getAudioMetaData.bind(this);
+    this.getAttentionData = this.getAttentionData.bind(this);
     this.toggleActionUnitBar = this.toggleActionUnitBar.bind(this);
+    this.dataSafeCheck = this.dataSafeCheck.bind(this);
+  }
+
+  getAttentionData(session_id){
+    fetch('http://127.0.0.1:8000/api/pml/' + session_id)
+    .then(response => {
+      response.json().then(data=>{
+        this.setState({
+          gaze_direction : data.map(item=>{
+            return item.gaze_direction;
+          })
+        })
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
   }
 
   getAUData(session_id) {
@@ -51,32 +69,21 @@ class StandaloneReport extends React.Component {
       });
   }
 
-  getGraphData(session_id) {
-    fetch("http://127.0.0.1:8000/api/mbu/" + session_id + "/data")
-      .then(response => {
-        response
-          .json()
-          .then(data => {
-            this.setState({
-              smiling_scores: data.map(e => {
-                return e.smiling_score;
-              }),
-              frowning_scores: data.map(e => {
-                return e.frowning_score;
-              }),
-              attention_scores: data.map(e => {
-                return e.attention_score;
-              })
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      })
-      .catch(err => {
-        console.log(err);
+  getAudioMetaData(session_id){
+    fetch("http://127.0.0.1:8000/api/sessions/" + session_id)
+    .then(response => {
+      response.json().then(data=>{
+        this.setState({
+          hesitations : data.hesitations,
+          transcript : data.transcript
+        })
       });
+    })
+    .catch(err=>{
+      console.log(err);
+    })
   }
+
 
   //Toggling the Action Unit Bar
   toggleActionUnitBar() {
@@ -113,9 +120,14 @@ class StandaloneReport extends React.Component {
 
   componentWillMount() {
     this.setSessionId(this.props.match.params.sessionid);
-    this.getGraphData(this.props.match.params.sessionid);
     this.getAUData(this.props.match.params.sessionid);
+    this.getAudioMetaData(this.props.match.params.sessionid);
+    this.getAttentionData(this.props.match.params.sessionid);
     this.setVideoFileName(this.props.match.params.sessionid);
+  }
+
+  dataSafeCheck(){
+    return this.state.AU6.length !== 0 && this.state.AU12.length !== 0 && this.state.gaze_direction.length !== 0 && this.state.hesitations !== null && this.state.transcript!==null;
   }
 
   render() {
@@ -123,6 +135,25 @@ class StandaloneReport extends React.Component {
     // if(this.state.video_file_id !=null){
     //     player = <VideoPlayer video_file_id={this.state.video_file_id}></VideoPlayer>
     // }
+    var summary_tabs = <div></div>;
+    console.log(this.dataSafeCheck());
+    if(this.dataSafeCheck()){
+        var summary_tabs = <SummaryTabs
+          data={{
+            smile: {
+              AU6: this.state.AU6,
+              AU12: this.state.AU12
+            },
+
+            audio : {
+              hesitations : this.state.hesitations,
+              transcript : this.state.transcript
+            },
+
+            gaze : this.state.gaze_direction
+          }}
+        />
+    }
 
     return (
       <Grid>
@@ -144,14 +175,7 @@ class StandaloneReport extends React.Component {
         <hr />
         <Row>
           <Col lg={12} md={12}>
-            <SummaryTabs
-              data={{
-                smile: {
-                  AU6: this.state.AU6,
-                  AU12: this.state.AU12
-                }
-              }}
-            />
+            {summary_tabs}
           </Col>
         </Row>
         <Row>
