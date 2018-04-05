@@ -19,9 +19,9 @@ class SummaryTabs extends React.Component{
       //smile
       var smile_data = this.props.data.smile;
       var smile_activations = 0;
-      //console.log(this.props);
+      console.log(this.props.data.smile);
       for(var i=0; i<smile_data.AU6.length; i++){
-        if(smile_data.AU6[i] > 1.1 && smile_data.AU12[i] > 0.82){
+        if(smile_data.AU6[i] && smile_data.AU12[i]){
           smile_activations ++;
         }
       }
@@ -47,7 +47,7 @@ class SummaryTabs extends React.Component{
 
       //hesitations
       this.setState({
-        hes_fr : (this.props.data.audio.hesitations/this.props.data.audio.transcript.length)/100
+        hes_fr : this.props.data.audio.hesitations
       })
 
     }
@@ -60,9 +60,9 @@ class SummaryTabs extends React.Component{
         return(
             <div>
                 <Tabs defaultActiveKey={1} id="summarytab">
-                    <Tab eventKey={1} title="Smile"><SummaryTypeData type="smile"  /></Tab>
-                    <Tab eventKey={2} title="Attention"><SummaryTypeData type="attn" /></Tab>
-                    <Tab eventKey={3} title="Hesitation"><SummaryTypeData type="hes" /></Tab>
+                    <Tab eventKey={1} title="Smile"><SummaryTypeData type="smile"  freq={this.state.smile_fr}/></Tab>
+                    <Tab eventKey={2} title="Attention"><SummaryTypeData type="attn" freq={this.state.attn_fr}/></Tab>
+                    <Tab eventKey={3} title="Hesitation"><SummaryTypeData type="hes" freq = {this.state.hes_fr}/></Tab>
                 </Tabs>
             </div>
         )

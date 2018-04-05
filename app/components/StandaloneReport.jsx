@@ -22,20 +22,31 @@ class StandaloneReport extends React.Component {
 
     this.setSessionId = this.setSessionId.bind(this);
     this.setVideoFileName = this.setVideoFileName.bind(this);
-    this.getAUData = this.getAUData.bind(this);
+    this.getPMLData = this.getPMLData.bind(this);
     this.getAudioMetaData = this.getAudioMetaData.bind(this);
-    this.getAttentionData = this.getAttentionData.bind(this);
     this.toggleActionUnitBar = this.toggleActionUnitBar.bind(this);
     this.dataSafeCheck = this.dataSafeCheck.bind(this);
   }
 
-  getAttentionData(session_id){
+  getPMLData(session_id){
     fetch('http://127.0.0.1:8000/api/pml/' + session_id)
     .then(response => {
       response.json().then(data=>{
         this.setState({
           gaze_direction : data.map(item=>{
             return item.gaze_direction;
+          }),
+          AU6 : data.map(e=>{
+            return e.action_unit_evidence[4]
+          }),
+          AU12 : data.map(e=>{
+            return e.action_unit_evidence[8]
+          }),
+          AU6_act : data.map(e=>{
+            return e.action_unit_activation[4]
+          }),
+          AU12_act : data.map(e=>{
+            return e.action_unit_activation[8]
           })
         })
       })
@@ -45,29 +56,6 @@ class StandaloneReport extends React.Component {
     })
   }
 
-  getAUData(session_id) {
-    fetch("http://127.0.0.1:8000/api/pml/" + session_id + "/audata")
-      .then(response => {
-        response
-          .json()
-          .then(data => {
-            this.setState({
-              AU6: data.map(e => {
-                return e.action_unit_evidence[4];
-              }),
-              AU12: data.map(e => {
-                return e.action_unit_evidence[8];
-              })
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
 
   getAudioMetaData(session_id){
     fetch("http://127.0.0.1:8000/api/sessions/" + session_id)
@@ -120,9 +108,8 @@ class StandaloneReport extends React.Component {
 
   componentWillMount() {
     this.setSessionId(this.props.match.params.sessionid);
-    this.getAUData(this.props.match.params.sessionid);
     this.getAudioMetaData(this.props.match.params.sessionid);
-    this.getAttentionData(this.props.match.params.sessionid);
+    this.getPMLData(this.props.match.params.sessionid);
     this.setVideoFileName(this.props.match.params.sessionid);
   }
 
@@ -141,8 +128,8 @@ class StandaloneReport extends React.Component {
         var summary_tabs = <SummaryTabs
           data={{
             smile: {
-              AU6: this.state.AU6,
-              AU12: this.state.AU12
+              AU6: this.state.AU6_act,
+              AU12: this.state.AU12_act
             },
 
             audio : {
@@ -181,7 +168,6 @@ class StandaloneReport extends React.Component {
         <Row>
           <Col lg={12} md={12}>
             <MBUGraph data={this.state.AU6} />
-            <MBUGraph data={this.state.AU12} />
           </Col>
         </Row>
       </Grid>
