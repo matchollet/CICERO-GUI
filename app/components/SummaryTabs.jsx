@@ -9,8 +9,12 @@ class SummaryTabs extends React.Component{
         this.state = {
           smile_fr : null,
           attn_fr : null,
-          hes_fr : null
+          hes_fr : null,
+          tabStyle : {
+            fontSize : '50px'
+          }
         }
+
         this.calculateScores = this.calculateScores.bind(this);
     }
 
@@ -60,9 +64,9 @@ class SummaryTabs extends React.Component{
         return(
             <div>
                 <Tabs defaultActiveKey={1} id="summarytab">
-                    <Tab eventKey={1} title="Smile"><SummaryTypeData type="smile"  freq={this.state.smile_fr}/></Tab>
-                    <Tab eventKey={2} title="Attention"><SummaryTypeData type="attn" freq={this.state.attn_fr}/></Tab>
-                    <Tab eventKey={3} title="Hesitation"><SummaryTypeData type="hes" freq = {this.state.hes_fr}/></Tab>
+                    <Tab style = {this.state.tabStyle} eventKey={1} title="Smile"><SummaryTypeData type="smile"  freq={this.state.smile_fr} data={this.props.data}/></Tab>
+                    <Tab style = {this.state.tabStyle} eventKey={2} title="Attention"><SummaryTypeData type="attn" freq={this.state.attn_fr} data={this.props.data}/></Tab>
+                    <Tab style = {this.state.tabStyle} eventKey={3} title="Hesitation"><SummaryTypeData type="hes" freq = {this.state.hes_fr} data = {this.props.data}/></Tab>
                 </Tabs>
             </div>
         )

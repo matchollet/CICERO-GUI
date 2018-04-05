@@ -1,5 +1,6 @@
 import React from "react";
 import {Col} from "react-bootstrap";
+import MBUGraph from "./MBUGraph.jsx";
 
 class SummaryTypeData extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class SummaryTypeData extends React.Component {
 
     var summary_data;
     var inner_paragraph;
+    var graph =<div></div>;
     var freq = Math.round(this.props.freq);
     switch(this.props.type){
       case "smile":
@@ -26,6 +28,8 @@ class SummaryTypeData extends React.Component {
           inner_paragraph = <p>You smiled {freq}% of the time. Keep up the good work!</p>
         }
 
+        graph = <MBUGraph data = {this.props.data.smile.AU6_data}/>
+
         summary_data = <div style={{
           fontSize : "20px"
         }}>
@@ -33,6 +37,8 @@ class SummaryTypeData extends React.Component {
           <p>Research has shown that smiling boosts your confidence and makes you more
           competent and attractive. </p>
           {inner_paragraph}
+          <br/>
+          {graph}
         </div>
       break;
 
@@ -45,6 +51,8 @@ class SummaryTypeData extends React.Component {
       } else {
         inner_paragraph = <p>You hesitated {freq} times. You can work on your speech fluency</p>
       }
+
+
 
       summary_data = <div style={{
         fontSize : "20px"
@@ -65,6 +73,9 @@ class SummaryTypeData extends React.Component {
         inner_paragraph = <p>You looked at the audience {freq}% of the time. Great job engaging the audience</p>
       }
 
+      graph = <MBUGraph data = {this.props.data.gaze.map((e)=>{
+        return e[1] === 'central' ? 1 : 0 ;
+      })} />
 
       summary_data = <div style={{
         fontSize : "20px"
@@ -72,6 +83,8 @@ class SummaryTypeData extends React.Component {
         <br/>
         <p>Research shows that sustained and focused eye contact makes the audience feel more invited.</p>
         {inner_paragraph}
+        <br/>
+        {graph}
       </div>
       break;
 

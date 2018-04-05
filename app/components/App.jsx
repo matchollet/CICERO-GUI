@@ -11,7 +11,7 @@ export default class App extends React.Component {
     return (
       <div>
         <Route exact path="/meme" component={HomeTest} />
-        <Route path="/report/:sessionid" component={StandaloneReport} />
+        <Route path="/report/:sessionid/:rtype" component={StandaloneReport} />
       </div>
     );
   }

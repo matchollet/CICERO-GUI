@@ -5,6 +5,7 @@ import SummaryGraph from "./SummaryGraph.jsx";
 import SummaryTabs from "./SummaryTabs.jsx";
 import ActionUnitGraph from "./ActionUnitGraph.jsx";
 import MBUGraph from "./MBUGraph.jsx";
+import TranscriptBox from './TranscriptBox.jsx';
 
 class StandaloneReport extends React.Component {
   constructor(props) {
@@ -37,10 +38,10 @@ class StandaloneReport extends React.Component {
             return item.gaze_direction;
           }),
           AU6 : data.map(e=>{
-            return e.action_unit_evidence[4]
+            return e.action_unit_evidence[4] - 1.3
           }),
           AU12 : data.map(e=>{
-            return e.action_unit_evidence[8]
+            return e.action_unit_evidence[8] - 1.8
           }),
           AU6_act : data.map(e=>{
             return e.action_unit_activation[4]
@@ -118,18 +119,19 @@ class StandaloneReport extends React.Component {
   }
 
   render() {
-    // var player = <div></div>;
-    // if(this.state.video_file_id !=null){
-    //     player = <VideoPlayer video_file_id={this.state.video_file_id}></VideoPlayer>
-    // }
-    var summary_tabs = <div></div>;
-    console.log(this.dataSafeCheck());
+
+    var summary_tabs = null;
+    var transcript_box = null;
+
+
     if(this.dataSafeCheck()){
-        var summary_tabs = <SummaryTabs
+        summary_tabs = <SummaryTabs
           data={{
             smile: {
               AU6: this.state.AU6_act,
-              AU12: this.state.AU12_act
+              AU12: this.state.AU12_act,
+              AU6_data : this.state.AU6,
+              AU12_data : this.state.AU12
             },
 
             audio : {
@@ -140,6 +142,9 @@ class StandaloneReport extends React.Component {
             gaze : this.state.gaze_direction
           }}
         />
+
+        transcript_box = <TranscriptBox trans = {this.state.transcript}/>
+
     }
 
     return (
@@ -149,6 +154,7 @@ class StandaloneReport extends React.Component {
             <h1>After-Action-Report</h1>
           </Col>
         </Row>
+
         <Row>
           <Col lg={3} md={3} xs={0}/>
           <Col lg={6} md={6} xs={12}>
@@ -160,14 +166,13 @@ class StandaloneReport extends React.Component {
           <Col lg={3} md={3} xs={0}/>
         </Row>
         <hr />
+        <Row className="text-center">
+          {transcript_box}
+        </Row>
+        <hr />
         <Row>
           <Col lg={12} md={12}>
             {summary_tabs}
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={12} md={12}>
-            <MBUGraph data={this.state.AU6} />
           </Col>
         </Row>
       </Grid>
