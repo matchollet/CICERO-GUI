@@ -122,10 +122,11 @@ class StandaloneReport extends React.Component {
 
     var summary_tabs = null;
     var transcript_box = null;
-
+    var rtype = this.props.match.params.rtype;
 
     if(this.dataSafeCheck()){
         summary_tabs = <SummaryTabs
+          rtype = {rtype}
           data={{
             smile: {
               AU6: this.state.AU6_act,
@@ -143,7 +144,7 @@ class StandaloneReport extends React.Component {
           }}
         />
 
-        transcript_box = <TranscriptBox trans = {this.state.transcript}/>
+        transcript_box = rtype == 2 ? <TranscriptBox trans = {this.state.transcript} rtype={rtype}/> : <div></div> ;
 
     }
 

@@ -61,12 +61,14 @@ class SummaryTabs extends React.Component{
     }
 
     render(){
+
+
         return(
             <div>
                 <Tabs defaultActiveKey={1} id="summarytab">
-                    <Tab style = {this.state.tabStyle} eventKey={1} title="Smile"><SummaryTypeData type="smile"  freq={this.state.smile_fr} data={this.props.data}/></Tab>
-                    <Tab style = {this.state.tabStyle} eventKey={2} title="Attention"><SummaryTypeData type="attn" freq={this.state.attn_fr} data={this.props.data}/></Tab>
-                    <Tab style = {this.state.tabStyle} eventKey={3} title="Hesitation"><SummaryTypeData type="hes" freq = {this.state.hes_fr} data = {this.props.data}/></Tab>
+                    <Tab style = {this.state.tabStyle} eventKey={1} title="Smile"><SummaryTypeData rtype = {this.props.rtype} type="smile"  freq={this.state.smile_fr} data={this.props.data}/></Tab>
+                    <Tab style = {this.state.tabStyle} eventKey={2} title="Attention"><SummaryTypeData rtype = {this.props.rtype} type="attn" freq={this.state.attn_fr} data={this.props.data}/></Tab>
+                    <Tab style = {this.state.tabStyle} eventKey={3} title="Hesitation"><SummaryTypeData rtype = {this.props.rtype} type="hes" freq = {this.state.hes_fr} data = {this.props.data}/></Tab>
                 </Tabs>
             </div>
         )

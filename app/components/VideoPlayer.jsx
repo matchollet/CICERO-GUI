@@ -1,5 +1,5 @@
 import React from "react";
-import { Player, LoadingSpinner } from "video-react";
+import { DefaultPlayer as Video } from 'react-html5video';
 
 class VideoPlayer extends React.Component {
   constructor(props) {
@@ -10,12 +10,9 @@ class VideoPlayer extends React.Component {
 
     return (
       <div>
-        <Player
-                src={'http://127.0.0.1:8000/video/' + this.props.session + '/' + this.props.session + '.mp4'}
-            >
-
-                <LoadingSpinner disabled/>
-            </Player>
+        <video width="600" height="540" controls>
+          <source src={'http://127.0.0.1:8000/video/' + this.props.session + '/' + this.props.session + '.mp4'} type="video/mp4"/>
+        </video>
       </div>
     );
   }
